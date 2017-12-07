@@ -13,9 +13,9 @@ type node struct {
 
 //node's constructor
 func (n *node) construct() {
-	(*n).last = nil
-	(*n).data = nil
-	(*n).next = nil
+	n.last = nil
+	n.data = nil
+	n.next = nil
 }
 
 //available behaviours of our doubly linked list
@@ -39,7 +39,7 @@ type list struct {
 
 func (l *list) init(v interface{}) *node {
 	//abort if it's not the first initiation
-	if (*l).count != 0 {
+	if l.count != 0 {
 		return nil
 	}
 
@@ -47,91 +47,91 @@ func (l *list) init(v interface{}) *node {
 	newNode := new(node)
 
 	//initialize the node
-	(*newNode).construct()
-	(*newNode).data = v
+	newNode.construct()
+	newNode.data = v
 
 	//as the first node in the list
-	(*l).ptr = newNode
-	(*l).first = newNode
-	(*l).last = newNode
+	l.ptr = newNode
+	l.first = newNode
+	l.last = newNode
 
-	(*l).count = 1
+	l.count = 1
 
 	return newNode
 }
 
 func (l *list) goFirst() *node {
-	(*l).ptr = (*l).first
-	return (*l).ptr
+	l.ptr = l.first
+	return l.ptr
 }
 
 func (l *list) goLast() *node {
-	(*l).ptr = (*l).last
-	return (*l).ptr
+	l.ptr = l.last
+	return l.ptr
 }
 
 func (l *list) moveFront() *node {
 	//move forward if available
-	if (*(*l).ptr).next != nil {
-		(*l).ptr = (*(*l).ptr).next
+	if l.ptr.next != nil {
+		l.ptr = l.ptr.next
 	}
-	return (*l).ptr
+	return l.ptr
 }
 
 func (l *list) moveBack() *node {
 	//move backward if available
-	if (*(*l).ptr).last != nil {
-		(*l).ptr = (*(*l).ptr).last
+	if l.ptr.last != nil {
+		l.ptr = l.ptr.last
 	}
-	return (*l).ptr
+	return l.ptr
 }
 
 func (l *list) addFront(v interface{}) *node {
 	//reject if list is not initialized
-	if (*l).count == 0 {
+	if l.count == 0 {
 		return nil
 	}
 
 	//create and initialize a node
 	newNode := new(node)
-	(*newNode).construct()
+	newNode.construct()
 
-	(*newNode).data = v
-	(*newNode).last = (*l).ptr
+	newNode.data = v
+	newNode.last = l.ptr
 
 	//put it into the list
-	(*(*l).ptr).next = newNode
+	l.ptr.next = newNode
 
 	//update the pointer
-	(*l).ptr = newNode
+	l.ptr = newNode
 
 	//increase the counter
-	(*l).count++
+	l.count++
 
 	return newNode
 }
 
 func (l *list) addBack(v interface{}) *node {
 	//reject if list is not initialized
-	if (*l).count == 0 {
+	if l.count == 0 {
 		return nil
 	}
 
 	//create and initialize a node
 	newnode := new(node)
-	(*newnode).construct()
+	newnode.construct()
 
-	(*newnode).data = v
-	(*newnode).next = (*l).ptr
+	newnode.data = v
+	newnode.next = l.ptr
 
 	//put it into the list
-	(*(*l).ptr).last = newnode
+	l.ptr.last = newnode
 
 	//update the pointer
-	(*l).ptr = newnode
+	l.ptr = newnode
 
 	//increase the counter
-	(*l).count++
+	l.count++
 
 	return newnode
 }
