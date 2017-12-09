@@ -17,7 +17,7 @@ func handleClient(conn *net.Conn) {
 	fmt.Println("Client connection established:",
 		(*conn).RemoteAddr().String())
 
-	var buff []byte
+	buff := make([]byte, 1024)
 
 	//received data from the client
 	n, err := (*conn).Read(buff)
